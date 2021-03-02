@@ -104,11 +104,11 @@ class UI {
   addCartItem(item){
     const div = document.createElement('div');
     div.classList.add('cart-item');
-    div.innerHTML = `<img src="./images/product-1.jpeg" alt="product" />
+    div.innerHTML = `<img src=${item.image} alt="product" />
     <div>
-        <h4>queen bed</h4>
-        <h5>$9.00</h5>
-        <span class="remove-item">remove</span>
+        <h4>${item.title}</h4>
+        <h5>$${item.price}</h5>
+        <span class="remove-item" data-id=${item.id}>remove</span>
     </div>
     <div>
         <i class="fas fa-chevron-up"></i>

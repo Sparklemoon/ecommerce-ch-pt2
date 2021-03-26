@@ -131,17 +131,25 @@ class UI {
     closeCartBtn.addEventListener('click',this.hideCart);
   }
   populateCart(cart) {
-    cart.forEach(item =>this.addCartItem(item));
+    cart.forEach(item => this.addCartItem(item));
   }
   hideCart() {
     cartOverlay.classList.remove("transparentBcg");
     cartDOM.classList.remove("showCart");
   }
-  cartLogic(){
-    clearCartBtn.addEventListener('click', this.clearCart)
+  cartLogic() {
+    //clear cart button
+    clearCartBtn.addEventListener('click', () =>{
+      this.clearCart();
+    });
+    // cart functionality
   }
   clearCart() {
-    console.log(this);
+    let cartItems = cart.map(item => item.id);
+    cartItems.forEach(id => this.removeItem(id))
+  }
+  removeItem(id) {
+    cart = cart.filter(item => item.id !==id);
   }
 }
 

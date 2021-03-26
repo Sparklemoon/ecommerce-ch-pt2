@@ -67,7 +67,7 @@ class UI {
       let inCart = cart.find(item => item.id === id);
       if(inCart){
         button.innerText = "In Cart";
-        button.disabled = true
+        button.disabled = true;
       }
       
         button.addEventListener('click', (event)=> {
@@ -94,15 +94,15 @@ class UI {
   setCartValues(cart) {
     let tempTotal = 0;
     let itemsTotal = 0;
-    cart.map(item =>{
+    cart.map(item => {
       tempTotal += item.price * item.amount;
-      itemsTotal += item.amount
+      itemsTotal += item.amount;
     })
     cartTotal.innerText = parseFloat(tempTotal.toFixed(2))
     cartItems.innerText = itemsTotal;
     
   }
-  addCartItem(item){
+  addCartItem(){
     const div = document.createElement('div');
     div.classList.add('cart-item');
     div.innerHTML = `<img src=${item.image} alt="product" />
@@ -123,6 +123,11 @@ class UI {
     cartOverlay.classList.add('transparentBcg');
     cartDOM.classList.add('showCart');
   }
+  setupAPP() {
+    cart = Storage.getCart();
+    this.setCartValues(cart);
+
+  }
 }
 
 //local storage
@@ -137,11 +142,17 @@ class Storage {
   static saveCart(cart) {
     localStorage.setItem('cart',JSON.stringify(cart));
   }
+  static getCart() {
+    return localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[]
+  }
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
 const ui = new UI();
 const products = new Products();
+
+//set up application
+ui.setupAPP();
 
 //get all products
 products.getProducts().then(products => {ui.displayProducts(products);

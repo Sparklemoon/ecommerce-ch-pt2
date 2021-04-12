@@ -151,6 +151,11 @@ class UI {
         cartContent.removeChild(removeItem.parentElement.parentElement);
         this.removeItem(id);
       }
+      else if (event.target.classList.contains("fa-chevron-up")) {
+let addAmount = event.target;
+let id = addAmount.dataset.id;
+console.log(addAmount);
+      }
     });
   }
   clearCart() {
